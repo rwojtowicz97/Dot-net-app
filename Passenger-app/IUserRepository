@@ -1,4 +1,5 @@
 Using System;
+Using System.Collections.Generic;
 Using Passenger.Core.Domain;
 
 namespace Passenger.Core.Repositories
