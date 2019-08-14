@@ -7,5 +7,8 @@ namespace Passenger.Domain
 {
     public class DayliRoute
     {
+        public Route Route { get; protected set; }
+        public Guid ID { get; protected set; }
+        public IEnumerable<PassengerNode> PassengerNodes { get; protected set; }
     }
 }
