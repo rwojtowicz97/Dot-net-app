@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Passenger.Infrastructure.Repositories;
-using Passenger.Domain;
+using Passenger.Core.Domain;
+using Passenger.Core.Repositories;
 
-namespace Passenger.Core.Repositories
+namespace Passenger.Infrastructure.Repositories
 {
-  public class UserRepository
+  public class UserRepository : IUserRepository
   {
-        User Get(Guid id);
-        User Get(string email);
-        IEnumerable<User> GetAll();
-        void Add(User user);
-        void Update(User user);
-        void Remove(Guid id);
+
   }
 }

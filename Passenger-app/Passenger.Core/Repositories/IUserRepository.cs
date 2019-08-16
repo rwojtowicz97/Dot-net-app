@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Passenger.Core.Repositories;
-using Passenger.Domain;
+using Passenger.Core.Domain;
 
 namespace Passenger.Core.Repositories
 {
