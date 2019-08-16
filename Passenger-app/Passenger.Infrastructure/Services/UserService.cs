@@ -1,17 +1,30 @@
 using System;
 using Passenger.Core.Repositories;
 using Passenger.Domain;
-
+using Passenger.Infrastructure.DTO;
 
 namespace Passenger.Infrastructure.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserService user)
+        public UserService(IUserRepository userRepository)
         {
-
+            _userRepository = userRepository;
         }
+
+        public UserDto Get(string email)
+        {
+            var user = _userRepository.Get(email);
+            return new UserDto
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email,
+                FullName = user.FullName
+            };
+        }
+
         public void Register(string email, string username, string password)
         {
             var user = _userRepository.Get(email);

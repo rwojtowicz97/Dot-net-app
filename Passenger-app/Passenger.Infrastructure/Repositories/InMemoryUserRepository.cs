@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Passenger.Core;
 using Passenger.Core.Repositories;
 using Passenger.Domain;
 using System.Linq;
