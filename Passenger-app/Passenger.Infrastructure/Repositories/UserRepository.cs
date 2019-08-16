@@ -1,10 +1,11 @@
-Using System;
-Using System.Collections.Generic;
-Using Passenger.Core.Domain;
+using System;
+using System.Collections.Generic;
+using Passenger.Infrastructure.Repositories;
+using Passenger.Domain;
 
 namespace Passenger.Core.Repositories
 {
-  public interface IUserRepository
+  public class UserRepository
   {
         User Get(Guid id);
         User Get(string email);
