@@ -8,7 +8,12 @@ namespace Passenger.Infrastructure.Repositories
 {
     public class InMemoryUserRepository : IUserRepository
     {
-        private static ISet<User> _users = new HashSet<User>();
+        private static ISet<User> _users = new HashSet<User>
+        {
+            new User("user1@mail.com", "user1", "pass", "salt"),
+            new User("user2@mail.com", "user2", "pass", "salt"),
+            new User("user3@mail.com", "user3", "pass", "salt")
+        };
         public void Add(User user)
         {
             _users.Add(user);
@@ -19,7 +24,6 @@ namespace Passenger.Infrastructure.Repositories
 
         public User Get(string email)
             => _users.Single(x => x.Email == email.ToLowerInvariant());
-        
 
         public IEnumerable<User> GetAll()
             => _users;

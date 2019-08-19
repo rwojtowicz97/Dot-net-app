@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="obj\**" />
+    <Compile Remove="Passenger.Api\obj\**" />
+    <Content Remove="bin\**" />
+    <Content Remove="obj\**" />
+    <Content Remove="Passenger.Api\obj\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <EmbeddedResource Remove="Passenger.Api\obj\**" />
+    <None Remove="bin\**" />
+    <None Remove="obj\**" />
+    <None Remove="Passenger.Api\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Passenger.Infrastructure\DTO\" />
     <Folder Include="Passenger.Infrastructure\Services\" />
     <Folder Include="wwwroot\" />

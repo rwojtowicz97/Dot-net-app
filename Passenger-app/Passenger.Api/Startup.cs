@@ -10,8 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Passenger.Core.Repositories;
+using Passenger.Infrastructure.Repositories;
+using Passenger.Infrastructure.Services;
 
-namespace Passenger-app
+namespace Passenger
 {
     public class Startup
     {
@@ -25,6 +28,8 @@ namespace Passenger-app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, InMemoryUserRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
