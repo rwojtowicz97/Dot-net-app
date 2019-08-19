@@ -15,9 +15,7 @@ namespace Passenger.Infrastructure.Repositories
             new User("user3@mail.com", "user3", "pass", "salt")
         };
         public void Add(User user)
-        {
-            _users.Add(user);
-        }
+            => _users.Add(user);
 
         public User Get(Guid id)
             => _users.Single(x => x.Id == id);

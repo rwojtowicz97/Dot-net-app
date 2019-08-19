@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Passenger.Infrastructure\DTO\" />
-    <Folder Include="Passenger.Infrastructure\Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
