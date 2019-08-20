@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Passenger.Passenger.Core.Repositories
+namespace Passenger.Core.Repositories
 {
     public interface IDriverRepository
     {

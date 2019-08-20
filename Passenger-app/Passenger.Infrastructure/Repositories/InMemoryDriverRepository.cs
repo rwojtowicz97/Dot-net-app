@@ -1,11 +1,11 @@
 ﻿using Passenger.Domain;
-using Passenger.Passenger.Core.Repositories;
+using Passenger.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Passenger.Passenger.Infrastructure.Repositories
+namespace Passenger.Infrastructure.Repositories
 {    
     public class InMemoryDriverRepository : IDriverRepository
     {

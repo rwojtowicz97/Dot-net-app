@@ -26,6 +26,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" /> 
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties passenger_1core_4json_1json__JsonSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
 
 </Project>
