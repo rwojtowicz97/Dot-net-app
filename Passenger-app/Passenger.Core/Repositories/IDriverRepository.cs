@@ -1,4 +1,4 @@
-﻿using Passenger.Domain;
+﻿using Passenger.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,10 @@ namespace Passenger.Core.Repositories
 {
     public interface IDriverRepository
     {
-        Driver Get(Guid userId);
-        Driver Get(string name);
-        IEnumerable<Driver> GetAll();
-        void Add(Driver user);
-        void Update(Driver user);
-        void Remove(Guid id);
+        Task<Driver> GetAsync(Guid userId);
+        Task<IEnumerable<Driver>> GetAllAsync();
+        Task Add(Driver user);
+        Task Update(Driver user);
+        Task Remove(Guid id);
     }
 }

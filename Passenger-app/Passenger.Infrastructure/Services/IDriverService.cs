@@ -8,6 +8,6 @@ namespace Passenger.Infrastructure.Services
 {
     interface IDriverService
     {
-
+        Task<DriverDto> GetAsync(string name);
     }
 }

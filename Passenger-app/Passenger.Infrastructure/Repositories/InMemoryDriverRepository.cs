@@ -1,4 +1,4 @@
-﻿using Passenger.Domain;
+﻿using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,25 +10,26 @@ namespace Passenger.Infrastructure.Repositories
     public class InMemoryDriverRepository : IDriverRepository
     {
         private ISet<Driver> _drivers = new HashSet<Driver>();
-        public void Add(Driver user)
-            => _drivers.Add(user);
+        public async Task AddAsync(Driver user)
+            => await Task.FromResult(_drivers.Add(user));
 
-        public Driver Get(string name)
-            => _drivers.Single(x => x.Name == name);
-        public Driver Get(Guid userId)
-            => _drivers.Single(x => x.UserId == userId);
+        public async Task<Driver> GetAsync(string name)
+            => await Task.FromResult(_drivers.SingleOrDefault(x => x.Name == name));
+        public async Task<Driver> GetAsync(Guid userId)
+            => await Task.FromResult(_drivers.SingleOrDefault(x => x.UserId == userId));
 
-        public IEnumerable<Driver> GetAll()
-            => _drivers;
+        public async Task<IEnumerable<Driver>> GetAllAsync()
+            => await Task.FromResult(_drivers);
 
-        public void Remove(Guid userId)
+        public async Task RemoveAsync(Guid userId)
         {
-            var driver = Get(userId);
+            var driver = await GetAsync(userId);
             _drivers.Remove(driver);
+            await Task.CompletedTask;
         }
-        public void Update(Driver user)
+        public async Task Update(Driver driver)
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
         }
     }
 }

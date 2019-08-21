@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Passenger.Core.Domain;
 
 namespace Passenger.Infrastructure.DTO
 {
@@ -9,5 +8,7 @@ namespace Passenger.Infrastructure.DTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<Route> Routes {get; set;}
+        public IEnumerable<DayliRoute> DayliRoutes{get; set;}
     }
 }

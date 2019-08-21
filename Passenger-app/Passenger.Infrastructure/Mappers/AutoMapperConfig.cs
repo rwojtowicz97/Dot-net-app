@@ -1,5 +1,5 @@
 using AutoMapper;
-using Passenger.Domain;
+using Passenger.Core.Domain;
 using Passenger.Infrastructure.DTO;
 
 namespace Passenger.Infrastructure.Mappers
