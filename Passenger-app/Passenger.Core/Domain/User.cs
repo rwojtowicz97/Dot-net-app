@@ -23,8 +23,8 @@ namespace Passenger.Core.Domain
         {
             Id = Guid.NewGuid();
             SetEmail(email);
-            Username = username;
-            Password = password;
+            SetUsername(username);
+            SetPassword(password);
             Salt = salt;
             CreatedAt = DateTime.UtcNow;
         }

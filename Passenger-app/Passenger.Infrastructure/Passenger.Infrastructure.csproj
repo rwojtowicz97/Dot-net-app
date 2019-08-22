@@ -6,7 +6,7 @@
 
 <ItemGroup>
     <ProjectReference Include="../Passenger.Core/Passenger.Core.csproj" />
-  </ItemGroup>
+</ItemGroup>
 
 <ItemGroup>
 <PackageReference Include="AutoMapper" Version="9.0.0" />
