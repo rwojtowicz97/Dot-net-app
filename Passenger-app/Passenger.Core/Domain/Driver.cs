@@ -17,5 +17,24 @@ namespace Passenger.Core.Domain
         {
 
         }
+
+        public Driver(string name)
+        {
+            SetName(name);
+            UserId = Guid.NewGuid();
+        }
+
+        public void SetName(string name)
+        {
+            if(!string.IsNullOrWhiteSpace(name))
+            {
+                Name = name;
+
+            }
+            else 
+            {
+                throw new Exception("Name is invalid.");
+            }
+        }
     }
 }

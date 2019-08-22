@@ -27,9 +27,7 @@ namespace Passenger.Infrastructure.Repositories
             _drivers.Remove(driver);
             await Task.CompletedTask;
         }
-        public async Task Update(Driver driver)
-        {
-            await Task.CompletedTask;
-        }
+        public async Task UpdateAsync(Driver driver)
+            => await Task.CompletedTask;
     }
 }

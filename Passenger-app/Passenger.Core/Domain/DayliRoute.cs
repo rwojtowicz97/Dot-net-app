@@ -10,5 +10,17 @@ namespace Passenger.Core.Domain
         public Route Route { get; protected set; }
         public Guid Id { get; protected set; }
         public IEnumerable<PassengerNode> PassengerNodes { get; protected set; }
+    
+        protected DayliRoute()
+        {
+        
+        }
+
+        public DayliRoute(Route route)
+        {
+            
+        }
+
+
     }
 }

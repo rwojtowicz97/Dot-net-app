@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Passenger.Core.Domain
 {
@@ -24,11 +22,50 @@ namespace Passenger.Core.Domain
         public User(string email, string username, string password, string salt)
         {
             Id = Guid.NewGuid();
-            Email = email.ToLowerInvariant();
+            SetEmail(email);
             Username = username;
             Password = password;
             Salt = salt;
             CreatedAt = DateTime.UtcNow;
+        }
+
+        public void SetEmail(string email)
+        {
+            //Email validation with regex
+            string pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
+            if (Regex.IsMatch(email, pattern))
+            {
+                Email = email.ToLowerInvariant();
+            }
+            else
+            {
+                throw new Exception("Email is invalid.");
+            }
+        }
+
+        public void SetUsername(string username)
+        {
+             if(!string.IsNullOrWhiteSpace(username))
+            {
+                Username = username;
+
+            }
+            else 
+            {
+                throw new Exception("Username is invalid.");
+            }
+        }
+
+        public void SetPassword(string password)
+        {
+            if(!(string.IsNullOrWhiteSpace(password) || password.Length < 8))
+            {
+                Password = password;
+            }
+            else 
+            {
+                throw new Exception("Password is to short or involves white space");
+            }
         }
     }
 }
