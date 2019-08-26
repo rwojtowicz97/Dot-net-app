@@ -20,6 +20,13 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="AutoMapper" Version="9.0.0" /> 
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+</PackageReference>
+<PackageReference Include="xunit" Version="2.4.1" />
+<PackageReference Include="FluentAssertions" Version="5.8.0" />
+<PackageReference Include="Moq" Version="4.12.0" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties passenger_1core_4json_1json__JsonSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
