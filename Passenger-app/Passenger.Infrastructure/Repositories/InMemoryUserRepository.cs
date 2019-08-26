@@ -11,9 +11,9 @@ namespace Passenger.Infrastructure.Repositories
     {
         private static ISet<User> _users = new HashSet<User>
         {
-            new User("user1@mail.com", "user1", "pass", "salt"),
-            new User("user2@mail.com", "user2", "pass", "salt"),
-            new User("user3@mail.com", "user3", "pass", "salt")
+            new User("user1@mail.com", "user1", "pass1234", "salt"),
+            new User("user2@mail.com", "user2", "pass1234", "salt"),
+            new User("user3@mail.com", "user3", "pass1234", "salt")
         };
         public async Task AddAsync(User user)
             => await Task.FromResult(_users.Add(user));

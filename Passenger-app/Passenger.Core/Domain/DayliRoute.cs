@@ -18,7 +18,7 @@ namespace Passenger.Core.Domain
 
         public DayliRoute(Route route)
         {
-            
+            Id = Guid.NewGuid();
         }
 
 

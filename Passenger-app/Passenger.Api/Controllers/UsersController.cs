@@ -23,7 +23,7 @@ namespace Passenger.Api.Controllers {
                 {
                     return NotFound();
                 }
-                return Json(user);
+                return Ok(user);
             }
         [HttpPost]
         public async Task Post([FromBody]CreateUser request)
