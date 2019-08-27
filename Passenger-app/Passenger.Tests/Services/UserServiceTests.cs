@@ -19,7 +19,7 @@ namespace Passenger.Tests.Services
            var mapperMock = new Mock<IMapper>();
 
            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
-           await userService.RegisterAsync("user@email.com", "user", "secret123");
+           await userService.RegisterAsync("user@email.com", "user", "secret12");
 
            userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Exactly(1));
         }
