@@ -2,10 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <!-- <AssemblyName>Passenger.Tests.EndToEnd</AssemblyName> -->
     <PackageId>Passenger.Tests.EndToEnd</PackageId>
-<!--     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion> -->
   </PropertyGroup>
 
 <ItemGroup>
