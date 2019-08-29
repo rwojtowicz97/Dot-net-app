@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Net;
 using System.Net.Http;
@@ -55,7 +56,6 @@ namespace Passenger.Tests.EndToEnd.Controllers
             var user = await GetUserAsync(request.Email);
             user.Email.Should().BeEquivalentTo(request.Email);
         }
-
         private async Task<UserDto> GetUserAsync(string email)
         {
             var response = await _client.GetAsync($"users/{email}");
