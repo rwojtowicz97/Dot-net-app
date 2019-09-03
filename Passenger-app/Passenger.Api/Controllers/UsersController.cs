@@ -6,13 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Passenger.Infrastructure.DTO;
 using Passenger.Infrastructure.Services;
 using Passenger.Infrastructure.Commands.Users;
+using Passenger.Infrastructure.Commands;
 
 namespace Passenger.Api.Controllers {
     [Route ("[controller]")]
     public class UsersController : ControllerBase {
         private readonly IUserService _userService;
-        public UsersController (IUserService userService) {
+        private readonly ICommandDispatcher _commmandDispatcher;
+        public UsersController (IUserService userService, ICommandDispatcher commandDispatcher)
+        {
             _userService = userService;
+            _commmandDispatcher = commandDispatcher;
         }
 
         [HttpGet ("{email}")]
@@ -26,11 +30,11 @@ namespace Passenger.Api.Controllers {
                 return Ok(user);
             }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]CreateUser request)
+        public async Task<IActionResult> Post([FromBody]CreateUser command)
           {
-            await _userService.RegisterAsync(request.Email, request.Username, request.Password);
-
-            return Created($"users/{request.Email}", new object());  
+            await _commmandDispatcher.DispatchAsync(command);
+            
+            return Created($"users/{command.Email}", new object());  
           }
     }
 }
