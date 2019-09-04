@@ -9,14 +9,14 @@ using Passenger.Infrastructure.Commands.Users;
 using Passenger.Infrastructure.Commands;
 
 namespace Passenger.Api.Controllers {
-    [Route ("[controller]")]
-    public class UsersController : ControllerBase {
+    
+    public class UsersController : ApiControllerBase 
+    {
         private readonly IUserService _userService;
-        private readonly ICommandDispatcher _commmandDispatcher;
-        public UsersController (IUserService userService, ICommandDispatcher commandDispatcher)
+        public UsersController (IUserService userService,
+             ICommandDispatcher commandDispatcher) : base(commandDispatcher)
         {
             _userService = userService;
-            _commmandDispatcher = commandDispatcher;
         }
 
         [HttpGet ("{email}")]
@@ -32,7 +32,7 @@ namespace Passenger.Api.Controllers {
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateUser command)
           {
-            await _commmandDispatcher.DispatchAsync(command);
+            await CommandDispatcher.DispatchAsync(command);
             
             return Created($"users/{command.Email}", new object());  
           }

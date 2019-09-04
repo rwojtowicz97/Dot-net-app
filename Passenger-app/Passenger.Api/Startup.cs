@@ -1,17 +1,14 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Passenger.Infrastructure.Repositories;
 using Passenger.Infrastructure.Services;
 using Passenger.Infrastructure.Mappers;
 using Passenger.Core.Repositories;
-using AutoMapper;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Passenger.Infrastructure.IoC.Modules;
@@ -48,13 +45,13 @@ namespace Passenger.Api
 
             return new AutofacServiceProvider(ApplicationContainer);
         }
-
+        [Obsolete]
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
