@@ -1,11 +1,10 @@
 using System.Reflection;
 using Autofac;
-using Passenger.Core.Repositories;
+using Passenger.Infrastructure.Services;
 
 namespace Passenger.Infrastructure.IoC.Modules
 {
-
-    public class RepositoryModule : Autofac.Module
+    public class ServiceModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -14,7 +13,7 @@ namespace Passenger.Infrastructure.IoC.Modules
                 .Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
-            .Where(X => X.IsAssignableTo<IRepository>())
+            .Where(X => X.IsAssignableTo<IService>())
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }

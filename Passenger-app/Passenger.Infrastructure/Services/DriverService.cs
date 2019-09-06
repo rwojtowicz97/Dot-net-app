@@ -1,12 +1,8 @@
 ﻿using Passenger.Core.Repositories;
 using Passenger.Infrastructure.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Passenger.Core.Domain;
-using Passenger.Infrastructure.Mappers;
 
 namespace Passenger.Infrastructure.Services
 {
