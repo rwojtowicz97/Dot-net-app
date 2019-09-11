@@ -13,11 +13,11 @@ namespace Passenger.Api.Controllers
             
         }
 
-        [HttpGet("{email}")]
-        public async Task<IActionResult> Get(string email)
-        {
+        // [HttpGet("{email}")]
+        // public async Task<IActionResult> Get(string email)
+        // {
           
-        }
+        // }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateDriver command)
           {
