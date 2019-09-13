@@ -18,8 +18,9 @@ namespace Passenger.Tests.Services
         {
            var userRepositoryMock = new Mock<IUserRepository>();
            var mapperMock = new Mock<IMapper>();
+           var encrypter = new Mock<IEncrypter>();
 
-           var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
+           var userService = new UserService(userRepositoryMock.Object, encrypter.Object, mapperMock.Object);
            await userService.RegisterAsync("user@email.com", "user", "secret12");
 
            userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Exactly(1));
@@ -30,8 +31,9 @@ namespace Passenger.Tests.Services
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var encrypter = new Mock<IEncrypter>();
 
-            var userService =new UserService(userRepositoryMock.Object, mapperMock.Object);
+            var userService =new UserService(userRepositoryMock.Object, encrypter.Object, mapperMock.Object);
             await userService.GetAsync("user1@mail.com");
             
             var user = new User("user1@mail.com", "testowy", "haslo123","salt");
@@ -45,8 +47,9 @@ namespace Passenger.Tests.Services
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var encrypter = new Mock<IEncrypter>();
 
-            var userService =new UserService(userRepositoryMock.Object, mapperMock.Object);
+            var userService =new UserService(userRepositoryMock.Object, encrypter.Object, mapperMock.Object);
             await userService.GetAsync("user@mail.com");
 
             userRepositoryMock.Setup(x => x.GetAsync("user@mail.com"))

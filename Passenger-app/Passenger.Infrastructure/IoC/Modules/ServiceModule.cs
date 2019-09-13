@@ -16,6 +16,10 @@ namespace Passenger.Infrastructure.IoC.Modules
             .Where(X => X.IsAssignableTo<IService>())
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<Encrypter>()
+                    .As<IEncrypter>()
+                    .SingleInstance();
         }
     }
 }

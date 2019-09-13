@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Passenger.Infrastructure.IoC.Modules;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Passenger.Api
 {
@@ -43,6 +45,16 @@ namespace Passenger.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "http://localhost:5001",
+                    ValidAudience = false,
+                    IssuerSigningKey = 
+                }
+            });
 
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
