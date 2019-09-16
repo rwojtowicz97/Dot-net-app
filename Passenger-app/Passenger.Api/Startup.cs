@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text;
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,8 @@ using Autofac.Extensions.DependencyInjection;
 using Passenger.Infrastructure.IoC.Modules;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Passenger.Infrastructure.Settings;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Passenger.Api
 {
@@ -46,13 +49,13 @@ namespace Passenger.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = "http://localhost:5001",
-                    ValidAudience = false,
-                    IssuerSigningKey = 
+                    ValidIssuer = jwtSettings.Issuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
                 }
             });
 
