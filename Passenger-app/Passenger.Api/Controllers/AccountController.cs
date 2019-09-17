@@ -10,6 +10,7 @@ namespace Passenger.Api.Controllers
     public class AccountController : ApiControllerBase 
     {
       private readonly IJwtHandler _jwtHandler;
+      
         public AccountController (ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler) 
             : base(commandDispatcher)
         {
