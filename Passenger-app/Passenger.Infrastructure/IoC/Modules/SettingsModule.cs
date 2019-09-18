@@ -12,10 +12,12 @@ namespace Passenger.Infrastructure.IoC.Modules
         {
             _configuration = configuration;
         }
-        protected override void Load(Autofac.ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterInstance(_configuration.GetSettings<GeneralSettings>())
-                   .SingleInstance();
+                    .SingleInstance();
+            builder.RegisterInstance(_configuration.GetSettings<JwtSettings>())
+                    .SingleInstance();
         }
     }
 }

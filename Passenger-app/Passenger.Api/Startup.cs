@@ -49,13 +49,14 @@ namespace Passenger.Api
             })
             .AddJwtBearer(x =>
             {
-                x.RequireHttpsMetadata = false;
+                x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = "http://localhost:5000",
                     ValidateAudience = false
                 };
             });
@@ -68,7 +69,7 @@ namespace Passenger.Api
             services.AddOptions();
             return new AutofacServiceProvider(ApplicationContainer);
         }
-        //[Obsolete]
+        [Obsolete]
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {

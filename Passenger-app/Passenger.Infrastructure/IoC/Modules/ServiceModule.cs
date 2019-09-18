@@ -22,7 +22,7 @@ namespace Passenger.Infrastructure.IoC.Modules
                     .SingleInstance();
             
             builder.RegisterType<JwtHandler>()
-                    .As<JwtHandler>()
+                    .As<IJwtHandler>()
                     .SingleInstance();
         }
     }

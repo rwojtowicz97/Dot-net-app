@@ -25,7 +25,7 @@ namespace Passenger.Api.Controllers {
             _settings = settings;
             _userService = userService;
         }
-        [Authorize]
+       // [Authorize]
         [HttpGet ("{email}")]
         public async Task<IActionResult> Get(string email) 
             {

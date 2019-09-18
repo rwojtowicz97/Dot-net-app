@@ -21,10 +21,11 @@ namespace Passenger.Api.Controllers
         [Route("token")]
         public IActionResult Get()
         {
-          var token = _jwtHandler.CreateToken("user1@mail.com", "user");
+          var token = _jwtHandler.CreateToken("user1@mail.com");
             
           return Json(token);
         }
+        
         [HttpGet]
         [Authorize]
         [Route("auth")]
