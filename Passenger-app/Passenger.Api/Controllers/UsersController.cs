@@ -25,7 +25,7 @@ namespace Passenger.Api.Controllers {
             _settings = settings;
             _userService = userService;
         }
-       // [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpGet ("{email}")]
         public async Task<IActionResult> Get(string email) 
             {
@@ -35,7 +35,7 @@ namespace Passenger.Api.Controllers {
                     return NotFound();
                 }
                 return Ok(user);
-            }
+            } 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateUser command)
           {

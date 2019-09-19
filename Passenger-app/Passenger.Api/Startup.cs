@@ -36,6 +36,7 @@ namespace Passenger.Api
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
 
             var jwtSettingsSection = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtSettingsSection);
