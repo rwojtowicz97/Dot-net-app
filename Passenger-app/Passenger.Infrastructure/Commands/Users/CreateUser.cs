@@ -1,3 +1,4 @@
+using System;
 namespace Passenger.Infrastructure.Commands.Users
 {
     public class CreateUser : ICommand

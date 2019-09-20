@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Passenger.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication;
+using Passenger.Infrastructure.Services;
 
 namespace Passenger.Api
 {
@@ -37,7 +38,7 @@ namespace Passenger.Api
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
-
+            services.AddMemoryCache();
             var jwtSettingsSection = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtSettingsSection);
 
@@ -82,6 +83,12 @@ namespace Passenger.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            var generalSettings = app.ApplicationServices.GetService<GeneralSettings>();
+            if(generalSettings.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
+            }
             app.UseAuthentication();
             app.UseMvc();
         }

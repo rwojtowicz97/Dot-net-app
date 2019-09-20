@@ -16,24 +16,7 @@ namespace Passenger.Api.Controllers
         {
             _jwtHandler = jwtHandler;
         }
-
-        [HttpGet]
-        [Route("token")]
-        public IActionResult Get()
-        {
-          var token = _jwtHandler.CreateToken("user1@mail.com", "admin");
-            
-          return Json(token);
-        }
         
-        [HttpGet]
-        [Authorize]
-        [Route("auth")]
-        public IActionResult GetAuth()
-        {
-          return Content("Auth");
-        }
-
         [HttpPut]
         [Route("password")]
         public async Task<IActionResult> Post([FromBody]ChangeUserPassword command)

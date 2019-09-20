@@ -20,12 +20,14 @@ namespace Passenger.Core.Domain
 
         }
 
-        public User(string email, string username, string password, string role, string salt)
+        public User(Guid userId, string email, string username, 
+            string password, string role, string salt)
         {
-            Id = Guid.NewGuid();
+            Id = userId;
             SetEmail(email);
             SetUsername(username);
-            SetPassword(password);
+            //SetPassword(password);
+            Password = password;
             Salt = salt;
             CreatedAt = DateTime.UtcNow;
             Role = role;
@@ -60,13 +62,13 @@ namespace Passenger.Core.Domain
 
         public void SetPassword(string password)
         {
-            if(!(string.IsNullOrWhiteSpace(password) || password.Length < 8))
+            if(string.IsNullOrWhiteSpace(password) || password.Length < 8)
             {
-                Password = password;
+                throw new Exception("Password is to short or involves white space");
             }
             else 
             {
-                throw new Exception("Password is to short or involves white space");
+                Password = password;
             }
         }
     }
