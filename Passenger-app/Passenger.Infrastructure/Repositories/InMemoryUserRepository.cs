@@ -20,7 +20,7 @@ namespace Passenger.Infrastructure.Repositories
             => await Task.FromResult(_users.SingleOrDefault(x => x.Id == id));
 
         public async Task<User> GetAsync(string email)
-            => await Task.FromResult(_users.SingleOrDefault(x => x.Email == email.ToLowerInvariant()));
+            => await Task.FromResult(_users.FirstOrDefault(x => x.Email == email.ToLowerInvariant()));
 
         public async Task<IEnumerable<User>> GetAllAsync()
             => await Task.FromResult(_users);

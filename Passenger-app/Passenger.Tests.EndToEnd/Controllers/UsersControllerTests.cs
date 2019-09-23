@@ -19,7 +19,7 @@ namespace Passenger.Tests.EndToEnd.Controllers
         [Fact]
         public async Task given_valid_emaill_user_should_exists()
         {
-            var email = "user1@test.com";
+            var email = "admin1@test.com";
             var user = await GetUserAsync(email);
             user.Email.Should().BeEquivalentTo(email);
         }
