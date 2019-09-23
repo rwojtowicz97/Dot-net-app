@@ -1,4 +1,5 @@
-﻿using Passenger.Core.Domain;
+﻿using System.Collections;
+using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Passenger.Infrastructure.Repositories
         public async Task<Driver> GetAsync(Guid userId)
             => await Task.FromResult(_drivers.SingleOrDefault(x => x.UserId == userId));
 
-        public async Task<IEnumerable<Driver>> GetAllAsync()
+        public async Task<IEnumerable<Driver>> BrowseAsync()
             => await Task.FromResult(_drivers);
 
         public async Task RemoveAsync(Guid userId)

@@ -65,7 +65,7 @@ namespace Passenger.Core.Domain
             }
         }
 
-        public static Vehicle Create(string name, int seats, string brand)
+        public static Vehicle Create(string name, string brand, int seats)
             => new Vehicle(name, seats, brand);
     }
 

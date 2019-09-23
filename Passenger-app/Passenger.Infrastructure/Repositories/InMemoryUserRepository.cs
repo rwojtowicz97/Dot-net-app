@@ -36,5 +36,8 @@ namespace Passenger.Infrastructure.Repositories
         {
             await Task.CompletedTask;
         }
+
+        public async Task<IEnumerable<User>> BrowseAsync()
+            => await Task.FromResult(_users);
     }
 }

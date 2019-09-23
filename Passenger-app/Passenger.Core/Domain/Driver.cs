@@ -12,16 +12,17 @@ namespace Passenger.Core.Domain
         public Vehicle Vehicle { get; protected set; }
         public IEnumerable<Route> Routes { get; protected set; }
         public IEnumerable<DayliRoute> DayliRoutes { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
 
         protected Driver()
         {
 
         }
 
-        public Driver(string name)
+        public Driver(User user)
         {
-            SetName(name);
-            UserId = Guid.NewGuid();
+            UserId = user.Id;
+            Name = user.Username;
         }
 
         public void SetName(string name)
@@ -35,6 +36,12 @@ namespace Passenger.Core.Domain
             {
                 throw new Exception("Name is invalid.");
             }
+        }
+
+        public void SetVehicle(string brand, string name, int seats)
+        {
+            Vehicle = Vehicle.Create(brand, name, seats);
+            UpdatedAt =  DateTime.UtcNow;
         }
     }
 }

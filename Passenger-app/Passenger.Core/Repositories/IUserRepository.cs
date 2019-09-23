@@ -13,5 +13,7 @@ namespace Passenger.Core.Repositories
         Task AddAsync(User user);
         Task UpdateAsync(User user);
         Task RemoveAsync(Guid id);
+        Task<IEnumerable<User>> BrowseAsync();
+
   }
 }
