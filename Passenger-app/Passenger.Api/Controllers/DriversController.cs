@@ -6,28 +6,30 @@ using Passenger.Infrastructure.Services;
 
 namespace Passenger.Api.Controllers
 {
-    public class DriverController : ApiControllerBase 
+    public class DriversController : ApiControllerBase 
     {
       private readonly IDriverService _driverService;
-        public DriverController (ICommandDispatcher commandDispatcher, IDriverService driverService) 
+        public DriversController (ICommandDispatcher commandDispatcher,
+         IDriverService driverService) 
             : base(commandDispatcher)
         {
             _driverService = driverService;
         }
 
-         [HttpGet("{email}")]
+         [HttpGet]
          public async Task<IActionResult> Get()
          {
            var drivers = await _driverService.BrowseAsync();
 
            return Json(drivers);
          }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateDriver command)
           {
             await CommandDispatcher.DispatchAsync(command);
             
-            return NoContent();
+            return Created($"drivers/{command.UserId}", null);
           }
     }
 
