@@ -25,19 +25,6 @@ namespace Passenger.Core.Domain
             Name = user.Username;
         }
 
-        public void SetName(string name)
-        {
-            if(!string.IsNullOrWhiteSpace(name))
-            {
-                Name = name;
-
-            }
-            else 
-            {
-                throw new Exception("Name is invalid.");
-            }
-        }
-
         public void SetVehicle(string brand, string name, int seats)
         {
             Vehicle = Vehicle.Create(brand, name, seats);

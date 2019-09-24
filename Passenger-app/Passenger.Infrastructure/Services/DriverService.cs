@@ -50,6 +50,7 @@ namespace Passenger.Infrastructure.Services
         public async Task<DriverDto> GetAsync(Guid userId)
         {
             var driver = await _driverRepository.GetAsync(userId);
+            
             return _mapper.Map<Driver, DriverDto>(driver);
         }
 
