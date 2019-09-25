@@ -1,7 +1,6 @@
 ﻿using Passenger.Core.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Passenger.Core.Repositories
@@ -12,6 +11,5 @@ namespace Passenger.Core.Repositories
         Task<IEnumerable<Driver>> BrowseAsync();
         Task AddAsync(Driver driver);
         Task UpdateAsync(Driver driver);
-        Task RemoveAsync(Guid id);
     }
 }

@@ -20,6 +20,14 @@ namespace Passenger.Infrastructure.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
+
+        public async Task<DriverDto> GetAsync(Guid userId)
+        {
+            var driver = await _driverRepository.GetAsync(userId);
+            
+            return _mapper.Map<Driver, DriverDto>(driver);
+        }
+
         public async Task<IEnumerable<DriverDto>> BrowseAsync()
         {
             var drivers = await _driverRepository.BrowseAsync();
@@ -40,18 +48,11 @@ namespace Passenger.Infrastructure.Services
 
             if(driver != null)
             {
-                throw new Exception($"Driver with id: {userId} already exists.");
+                 throw new Exception($"Driver with id: {userId} already exists.");
             }
 
             driver = new Driver(user);
             await  _driverRepository.AddAsync(driver);
-        }
-
-        public async Task<DriverDto> GetAsync(Guid userId)
-        {
-            var driver = await _driverRepository.GetAsync(userId);
-            
-            return _mapper.Map<Driver, DriverDto>(driver);
         }
 
         public async Task SetVehicleAsync(Guid userId, string brand, string name, int seats)

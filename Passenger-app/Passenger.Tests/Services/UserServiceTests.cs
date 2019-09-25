@@ -49,7 +49,7 @@ namespace Passenger.Tests.Services
             var mapperMock = new Mock<IMapper>();
             var encrypter = new Mock<IEncrypter>();
 
-            var userService =new UserService(userRepositoryMock.Object, encrypter.Object, mapperMock.Object);
+            var userService = new UserService(userRepositoryMock.Object, encrypter.Object, mapperMock.Object);
             await userService.GetAsync("user@mail.com");
 
             userRepositoryMock.Setup(x => x.GetAsync("user@mail.com"))

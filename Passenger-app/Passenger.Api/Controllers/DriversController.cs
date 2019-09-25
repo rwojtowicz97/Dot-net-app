@@ -38,7 +38,7 @@ namespace Passenger.Api.Controllers
           {
             await CommandDispatcher.DispatchAsync(command);
             
-            return Created($"drivers/{command.UserId}", null);
+            return Created($"drivers/{command.UserId}", new Object());
           }
     }
 

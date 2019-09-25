@@ -28,14 +28,14 @@ namespace Passenger.Api.Controllers {
 
         [HttpGet ("{email}")]
         public async Task<IActionResult> Get(string email) 
+        {
+            var user = await _userService.GetAsync(email);
+            if(user == null)
             {
-                var user = await _userService.GetAsync(email);
-                if(user == null)
-                {
-                    return NotFound();
-                }
-                return Ok(user);
-            } 
+                return NotFound();
+            }
+            return Json(user);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()

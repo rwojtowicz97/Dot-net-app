@@ -26,23 +26,27 @@ namespace Passenger.Infrastructure.Services
             {   
                 var userId = Guid.NewGuid();
                 var username = $"user{i}";
+                //tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
+                //             username, "secret1234", "user"));
+                //tasks.Add(_driverService.CreateAsync(userId));
+                //tasks.Add(_driverService.SetVehicleAsync(userId, "BMW", "i8", 5));
+                await _userService.RegisterAsync(userId, $"{username}@test.com",
+                             username, "secret1234", "user");
                 _logger.LogInformation($"Created a new user: '{username}'.");
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
-                             username, "secret1234", "user"));
-                tasks.Add(_driverService.CreateAsync(userId));
-                tasks.Add(_driverService.SetVehicleAsync(userId, "BMW", "i8", 5));
+                await _driverService.CreateAsync(userId);
+                await _driverService.SetVehicleAsync(userId, "BMW", "i8", 5);
                 _logger.LogInformation($"Created a new driver for: '{username}'.");
-
             }
+            
             for(var i = 1; i<=3; i++)
             {   
                 var userId = Guid.NewGuid();
                 var username = $"admin{i}";
                 _logger.LogInformation($"Created a new admin: '{username}'.");
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
-                             username, "secret1234", "admin"));
+                await _userService.RegisterAsync(userId, $"{username}@test.com",
+                             username, "secret1234", "admin");
             }
-            await Task.WhenAll(tasks);
+            // await Task.WhenAll(tasks);
             _logger.LogInformation("Data was Initialized.");
         }
     }
