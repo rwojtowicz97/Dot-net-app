@@ -54,9 +54,9 @@ namespace Passenger.Infrastructure.Services
             return vehicles;
         }
 
-        public async Task<Vehicle> GetAsync(string brand, string name)
+        public async Task<VehicleDTO> GetAsync(string brand, string name)
         {
-            if(!availableVehicles.Contains(brand))
+            if(!availableVehicles.ContainsKey(brand))
             {
                 throw new Exception($"Vehicle brand: '{brand}' is not avaible.");
             }
@@ -66,7 +66,12 @@ namespace Passenger.Infrastructure.Services
             {
                 throw new Exception($"Vechicle: '{name}' for brand '{brand}' is not avaible.");
             }
-            
+            return await Task.FromResult(new VehicleDTO
+            {
+                Brand = brand,
+                Name = vehicle.Name,
+                Seats = vehicle.Seats
+            });
         }
 
         public async Task<IEnumerable<VehicleDTO>> GetAllAsync()

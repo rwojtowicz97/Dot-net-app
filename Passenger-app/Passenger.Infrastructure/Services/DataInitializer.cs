@@ -34,7 +34,7 @@ namespace Passenger.Infrastructure.Services
                              username, "secret1234", "user");
                 _logger.LogInformation($"Created a new user: '{username}'.");
                 await _driverService.CreateAsync(userId);
-                await _driverService.SetVehicleAsync(userId, "BMW", "i8", 5);
+                await _driverService.SetVehicleAsync(userId, "BMW", "i8");
                 _logger.LogInformation($"Created a new driver for: '{username}'.");
             }
             

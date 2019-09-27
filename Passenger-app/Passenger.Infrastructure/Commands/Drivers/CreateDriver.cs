@@ -9,7 +9,6 @@ namespace Passenger.Infrastructure.Commands.Drivers
         public class DriverVechicle
         {
             public string Name { get; protected set; }
-            public int Seats { get; protected set; }
             public string Brand { get; protected set; }
         }
     }
