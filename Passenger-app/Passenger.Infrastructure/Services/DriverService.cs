@@ -65,8 +65,9 @@ namespace Passenger.Infrastructure.Services
             {
                 throw new Exception($"Driver with user id: '{userId}' was not found.");
             }
-            var vehicle = await _vehicleProvider.GetAsync(brand, name);
-            driver.SetVehicle(brand, name, seats);
+            var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
+            var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
+            driver.SetVehicle(brand, name);
         }
     }
 }
