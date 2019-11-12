@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Xml;
+using System.Text;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Passenger.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication;
 using Passenger.Infrastructure.Services;
+using Newtonsoft.Json;
 
 namespace Passenger.Api
 {
@@ -36,7 +38,9 @@ namespace Passenger.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                            .AddJsonOptions(x => x.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented)
+                            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
             services.AddMemoryCache();
             var jwtSettingsSection = Configuration.GetSection("JwtSettings");

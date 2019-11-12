@@ -1,6 +1,6 @@
 namespace Passenger.Infrastructure.DTO
 {
-    public class VehicleDTO
+    public class VehicleDto
     {
         public string Name { get; set; }
         public int Seats { get; set; }

@@ -24,11 +24,11 @@ namespace Passenger.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<DriverDto> GetAsync(Guid userId)
+        public async Task<DriverDetailsDto> GetAsync(Guid userId)
         {
             var driver = await _driverRepository.GetAsync(userId);
             
-            return _mapper.Map<Driver, DriverDto>(driver);
+            return _mapper.Map<Driver, DriverDetailsDto>(driver);
         }
 
         public async Task<IEnumerable<DriverDto>> BrowseAsync()
@@ -67,7 +67,7 @@ namespace Passenger.Infrastructure.Services
             }
             var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
             var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
-            driver.SetVehicle(brand, name);
+            driver.SetVehicle(vehicle);
         }
     }
 }

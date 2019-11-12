@@ -43,18 +43,19 @@ namespace Passenger.Infrastructure.Services
         {
             _cache = cache;
         }
-        public async Task<IEnumerable<VehicleDTO>> BrowseAsync()
+        public async Task<IEnumerable<VehicleDto>> BrowseAsync()
         {
-            var vehicles = _cache.Get<IEnumerable<VehicleDTO>>(CacheKey);
+            var vehicles = _cache.Get<IEnumerable<VehicleDto>>(CacheKey);
             if(vehicles == null)
             {
                 vehicles = await GetAllAsync();
                 _cache.Set(CacheKey, vehicles);
             }
+
             return vehicles;
         }
 
-        public async Task<VehicleDTO> GetAsync(string brand, string name)
+        public async Task<VehicleDto> GetAsync(string brand, string name)
         {
             if(!availableVehicles.ContainsKey(brand))
             {
@@ -66,7 +67,7 @@ namespace Passenger.Infrastructure.Services
             {
                 throw new Exception($"Vechicle: '{name}' for brand '{brand}' is not avaible.");
             }
-            return await Task.FromResult(new VehicleDTO
+            return await Task.FromResult(new VehicleDto
             {
                 Brand = brand,
                 Name = vehicle.Name,
@@ -74,9 +75,9 @@ namespace Passenger.Infrastructure.Services
             });
         }
 
-        public async Task<IEnumerable<VehicleDTO>> GetAllAsync()
+        public async Task<IEnumerable<VehicleDto>> GetAllAsync()
             => await Task.FromResult(availableVehicles.GroupBy(x => x.Key)
-                .SelectMany(g => g.SelectMany(v => v.Value.Select(c => new VehicleDTO
+                .SelectMany(g => g.SelectMany(v => v.Value.Select(c => new VehicleDto
                 {
                     Brand = v.Key,
                     Name = c.Name,
