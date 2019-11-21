@@ -7,23 +7,24 @@ namespace Passenger.Core.Domain
 {
     public class Route
     {
-        public Guid Id { get; protected set; }
+        public string Name { get; protected set;}
         public Node StartNode { get; protected set; }
         public Node EndNode { get; protected set; }
         public IEnumerable<Route> Routes { get; protected set; }
     
         protected Route()
         {
-            Id = Guid.NewGuid();
+            
         }
 
-        protected Route(Node startNode, Node endNode)
+        protected Route(string name, Node start, Node end)
         {
-            StartNode = startNode;
-            EndNode = endNode;
+            Name = name;
+            StartNode = start;
+            EndNode = end;
         }
 
-        public static Route Create(Node startNode, Node endNode)
-            => new Route(startNode, endNode);
+        public static Route Create(string name, Node start, Node end)
+            => new Route(name, start, end);
     }
 }

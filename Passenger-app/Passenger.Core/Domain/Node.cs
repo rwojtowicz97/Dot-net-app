@@ -20,6 +20,9 @@ namespace Passenger.Core.Domain
             SetLatitude(latitude);
         }
 
+        public static Node Create(string address, double longitude, double latitude)
+            => new Node(address, longitude, latitude);
+        
         public void SetAddress(string address)
         {
             if(!string.IsNullOrWhiteSpace(address))
