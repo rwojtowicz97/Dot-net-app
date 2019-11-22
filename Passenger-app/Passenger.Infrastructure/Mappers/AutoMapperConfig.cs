@@ -4,16 +4,16 @@ using Passenger.Infrastructure.DTO;
 
 namespace Passenger.Infrastructure.Mappers
 {
-    public class AutoMapperConfig
+    public static class AutoMapperConfig
     {
         public static IMapper Initialize()
         =>  new MapperConfiguration(cfg =>
             {
+                cfg.CreateMap<Driver, DriverDto>();
+                cfg.CreateMap<Driver, DriverDetailsDto>();
                 cfg.CreateMap<Node, NodeDto>();
                 cfg.CreateMap<Route, RouteDto>();
                 cfg.CreateMap<User, UserDto>();
-                cfg.CreateMap<Driver, DriverDetailsDto>();
-                cfg.CreateMap<Driver, DriverDto>();
                 cfg.CreateMap<Vehicle, VehicleDto>();
             }).CreateMapper();
         

@@ -9,12 +9,15 @@ namespace Passenger.Infrastructure.Services
     {
         private readonly IUserService _userService;
         private readonly IDriverService _driverService;
+        private readonly IDriverRouteService _driverRouteService;
         private readonly ILogger<DataInitializer> _logger;
         public DataInitializer(IUserService userService, IDriverService driverService,
+        IDriverRouteService driverRouteService,
          ILogger<DataInitializer> logger)
         {
             _userService = userService;
             _driverService = driverService;
+            _driverRouteService = driverRouteService;
             _logger = logger;
         }
 
@@ -26,16 +29,15 @@ namespace Passenger.Infrastructure.Services
             {   
                 var userId = Guid.NewGuid();
                 var username = $"user{i}";
-                //tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
-                //             username, "secret1234", "user"));
-                //tasks.Add(_driverService.CreateAsync(userId));
-                //tasks.Add(_driverService.SetVehicleAsync(userId, "BMW", "i8", 5));
-                await _userService.RegisterAsync(userId, $"{username}@test.com",
-                             username, "secret1234", "user");
+                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
+                            username, "secret1234", "user"));
                 _logger.LogInformation($"Created a new user: '{username}'.");
-                await _driverService.CreateAsync(userId);
-                await _driverService.SetVehicleAsync(userId, "BMW", "i8");
-                _logger.LogInformation($"Created a new driver for: '{username}'.");
+                tasks.Add(_driverService.CreateAsync(userId));
+                tasks.Add(_driverService.SetVehicleAsync(userId, "BMW", "i8"));
+                _logger.LogInformation($"Adding a new driver for: '{username}'.");
+                tasks.Add(_driverRouteService.AddAsync(userId, "Default route", 1,1,2,2));
+                tasks.Add(_driverRouteService.AddAsync(userId, "Job route", 3,4,7,8));
+                _logger.LogInformation($"Adding route for: '{username}'.");
             }
             
             for(var i = 1; i<=3; i++)
@@ -43,10 +45,10 @@ namespace Passenger.Infrastructure.Services
                 var userId = Guid.NewGuid();
                 var username = $"admin{i}";
                 _logger.LogInformation($"Created a new admin: '{username}'.");
-                await _userService.RegisterAsync(userId, $"{username}@test.com",
-                             username, "secret1234", "admin");
+                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
+                             username, "secret1234", "admin"));
             }
-            // await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
             _logger.LogInformation("Data was Initialized.");
         }
     }

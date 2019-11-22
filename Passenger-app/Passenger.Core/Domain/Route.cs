@@ -8,9 +8,8 @@ namespace Passenger.Core.Domain
     public class Route
     {
         public string Name { get; protected set;}
-        public Node StartNode { get; protected set; }
-        public Node EndNode { get; protected set; }
-        public IEnumerable<Route> Routes { get; protected set; }
+        public Node Start { get; protected set; }
+        public Node End { get; protected set; }
     
         protected Route()
         {
@@ -20,8 +19,8 @@ namespace Passenger.Core.Domain
         protected Route(string name, Node start, Node end)
         {
             Name = name;
-            StartNode = start;
-            EndNode = end;
+            Start = start;
+            End = end;
         }
 
         public static Route Create(string name, Node start, Node end)
