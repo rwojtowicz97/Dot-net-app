@@ -5,6 +5,7 @@ using AutoMapper;
 using Passenger.Core.Domain;
 using System;
 using System.Collections.Generic;
+using Passenger.Infrastructure.Extensions;
 
 namespace Passenger.Infrastructure.Services
 {
@@ -40,12 +41,7 @@ namespace Passenger.Infrastructure.Services
 
         public async Task CreateAsync(Guid userId)
         {
-            var user = await _userRepository.GetAsync(userId);
-
-            if(user == null)
-            {
-                throw new Exception($"User with id: {userId} was not found.");
-            }
+            var user = await _userRepository.GetOrFailAsync(userId);
 
             var driver = await _driverRepository.GetAsync(userId);
 
@@ -60,14 +56,16 @@ namespace Passenger.Infrastructure.Services
 
         public async Task SetVehicleAsync(Guid userId, string brand, string name)
         {
-            var driver = await _driverRepository.GetAsync(userId);
-            if(driver == null)
-            {
-                throw new Exception($"Driver with user id: '{userId}' was not found.");
-            }
+            var driver = await _driverRepository.GetOrFailAsync(userId);
             var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
             var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
             driver.SetVehicle(vehicle);
+        }
+
+        public async Task DeleteAsync(Guid userId)
+        {
+            var driver = await _driverRepository.GetOrFailAsync(userId);
+            await _driverRepository.DeleteAsync(driver);
         }
     }
 }

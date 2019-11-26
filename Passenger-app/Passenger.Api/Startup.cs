@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication;
 using Passenger.Infrastructure.Services;
 using Newtonsoft.Json;
 
+
 namespace Passenger.Api
 {
     public class Startup
@@ -93,6 +94,7 @@ namespace Passenger.Api
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
             }
+            app.UseExceptionHandler();
             app.UseAuthentication();
             app.UseMvc();
         }

@@ -12,7 +12,6 @@ namespace Passenger.Core.Domain
         public Guid UserId { get; protected set; }
         public string Name { get; protected set; }
         public Vehicle Vehicle { get; protected set; }
-        public double Distance { get; protected set; }
         public IEnumerable<Route> Routes 
         { 
             get { return _routes; } 
@@ -53,7 +52,7 @@ namespace Passenger.Core.Domain
             {
                 throw new Exception($"Distance can't be less or equal 0.");
             }
-            _routes.Add(Route.Create(name, start, end));
+            _routes.Add(Route.Create(name, start, end, distance));
             UpdatedAt = DateTime.UtcNow;
         }
 
