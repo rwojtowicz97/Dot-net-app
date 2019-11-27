@@ -6,6 +6,7 @@ using Passenger.Core.Domain;
 using System;
 using System.Collections.Generic;
 using Passenger.Infrastructure.Extensions;
+using Passenger.Infrastructure.Exceptions;
 
 namespace Passenger.Infrastructure.Services
 {
@@ -47,7 +48,7 @@ namespace Passenger.Infrastructure.Services
 
             if(driver != null)
             {
-                 throw new Exception($"Driver with id: {userId} already exists.");
+                 throw new ServiceException(Exceptions.ErrorCodes.DriverAlreadyExists ,$"Driver with id: {userId} already exists.");
             }
 
             driver = new Driver(user);

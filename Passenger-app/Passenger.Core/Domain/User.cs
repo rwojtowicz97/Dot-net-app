@@ -43,7 +43,7 @@ namespace Passenger.Core.Domain
             }
             else
             {
-                throw new Exception("Email is invalid.");
+                throw new DomainException(ErrorCodes.InvalidEmail, "Email is invalid.");
             }
         }
 
@@ -56,7 +56,7 @@ namespace Passenger.Core.Domain
             }
             else 
             {
-                throw new Exception("Username is invalid.");
+                throw new DomainException(ErrorCodes.InvalidUsername, "Username is invalid.");
             }
         }
 
@@ -64,7 +64,7 @@ namespace Passenger.Core.Domain
         {
             if(string.IsNullOrWhiteSpace(password) || password.Length < 8)
             {
-                throw new Exception("Password is to short or involves white space");
+                throw new DomainException(ErrorCodes.InvalidPassword, "Password is to short or involves white space");
             }
             else 
             {

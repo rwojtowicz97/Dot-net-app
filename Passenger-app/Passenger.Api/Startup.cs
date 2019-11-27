@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Net.Mime;
+using System.Xml;
 using System.Text;
 using System;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +17,8 @@ using Passenger.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication;
 using Passenger.Infrastructure.Services;
 using Newtonsoft.Json;
+using Passenger.Api.Framework;
+
 
 
 namespace Passenger.Api
@@ -94,7 +97,7 @@ namespace Passenger.Api
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
             }
-            app.UseExceptionHandler();
+            app.UseExceptionHandler2();
             app.UseAuthentication();
             app.UseMvc();
         }
