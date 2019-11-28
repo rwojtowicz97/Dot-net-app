@@ -18,8 +18,8 @@ using Microsoft.AspNetCore.Authentication;
 using Passenger.Infrastructure.Services;
 using Newtonsoft.Json;
 using Passenger.Api.Framework;
-
-
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Passenger.Api
 {
@@ -88,8 +88,11 @@ namespace Passenger.Api
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
+            app.AddNLogWeb();
+            env.ConfigureNLog("nlog.config");
 
             var generalSettings = app.ApplicationServices.GetService<GeneralSettings>();
             if(generalSettings.SeedData)

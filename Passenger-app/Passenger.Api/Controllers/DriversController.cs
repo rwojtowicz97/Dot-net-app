@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Passenger.Infrastructure.Commands;
 using Passenger.Infrastructure.Commands.Drivers;
 using Passenger.Infrastructure.Services;
@@ -10,6 +11,7 @@ namespace Passenger.Api.Controllers
 {
     public class DriversController : ApiControllerBase 
     {
+      private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
       private readonly IDriverService _driverService;
         public DriversController (ICommandDispatcher commandDispatcher,
          IDriverService driverService) 
@@ -21,6 +23,7 @@ namespace Passenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+          Logger.Info("Getching drivers");
           var drivers = await _driverService.BrowseAsync();
 
           return Json(drivers);
