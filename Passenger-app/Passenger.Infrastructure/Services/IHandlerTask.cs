@@ -9,10 +9,10 @@ namespace Passenger.Infrastructure.Services
         IHandlerTask Always(Func<Task> always);
         IHandlerTask OnCustomError(Func<PassengerException, Task> onCustomError,
             bool propagateException = false, bool executeOnError = false);
-        IHandlerTask OnError(Func<PassengerException, Task> onCustomError,
+        IHandlerTask OnError(Func<Exception, Task> onError,
             bool propagateException = false, bool executeOnError = false);
         
-        Task OnSuccess(Func<Task> onSuccess);
+        IHandlerTask OnSuccess(Func<Task> onSuccess);
         IHandlerTask PropagateException();
         IHandlerTask DoNotPropagateException();
         IHandler Next();
