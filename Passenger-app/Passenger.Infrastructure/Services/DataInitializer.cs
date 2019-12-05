@@ -29,14 +29,14 @@ namespace Passenger.Infrastructure.Services
             {   
                 var userId = Guid.NewGuid();
                 var username = $"user{i}";
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
-                            username, "secret1234", "user"));
+                await _userService.RegisterAsync(userId, $"{username}@test.com",
+                            username, "secret1234", "user");
                 _logger.LogInformation($"Created a new user: '{username}'.");
-                tasks.Add(_driverService.CreateAsync(userId));
-                tasks.Add(_driverService.SetVehicleAsync(userId, "BMW", "i8"));
+                await _driverService.CreateAsync(userId);
+                await _driverService.SetVehicleAsync(userId, "BMW", "i8");
                 _logger.LogInformation($"Adding a new driver for: '{username}'.");
-                tasks.Add(_driverRouteService.AddAsync(userId, "Default route", 1,1,2,2));
-                tasks.Add(_driverRouteService.AddAsync(userId, "Job route", 3,4,7,8));
+                await _driverRouteService.AddAsync(userId, "Default route", 1,1,2,2);
+                await _driverRouteService.AddAsync(userId, "Job route", 3,4,7,8);
                 _logger.LogInformation($"Adding route for: '{username}'.");
             }
             
