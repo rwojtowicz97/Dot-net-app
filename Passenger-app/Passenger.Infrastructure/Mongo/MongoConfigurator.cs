@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 
 namespace Passenger.Infrastructure.Mongo
@@ -26,7 +27,7 @@ namespace Passenger.Infrastructure.Mongo
             public IEnumerable<IConvention> Conventions => new List<IConvention>
             {
                 new IgnoreExtraElementsConvention(true),
-                new EnumRepresentationConvention(MongoDB.Bson.BsonType.String),
+                new EnumRepresentationConvention(BsonType.String),
                 new CamelCaseElementNameConvention()
             };
 

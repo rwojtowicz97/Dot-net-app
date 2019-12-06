@@ -24,7 +24,7 @@ namespace Passenger.Infrastructure.IoC.Modules
                 var database = client.GetDatabase(settings.Database);
 
                 return database;
-            }).As<MongoDatabaseBase>();
+            }).As<IMongoDatabase>();
 
             var assembly = typeof(CommandModule)
                 .GetTypeInfo()

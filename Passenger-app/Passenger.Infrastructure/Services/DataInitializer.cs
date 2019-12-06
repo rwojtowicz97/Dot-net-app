@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,11 @@ namespace Passenger.Infrastructure.Services
 
         public async Task SeedAsync()
         {
+            var users = await _userService.BrowseAsync();
+            if(users.Any())
+            {
+                return;
+            }
             _logger.LogInformation("Initializing data...");
             var tasks = new List<Task>();
             for(var i = 1; i<=10; i++)
