@@ -60,6 +60,7 @@ namespace Passenger.Infrastructure.Services
             var driver = await _driverRepository.GetOrFailAsync(userId);
             var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
             var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
+            
             driver.SetVehicle(vehicle);
         }
 

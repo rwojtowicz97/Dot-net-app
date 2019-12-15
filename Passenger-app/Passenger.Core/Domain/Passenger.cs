@@ -21,7 +21,7 @@ namespace Passenger.Core.Domain
         public IEnumerable<PassengerNode> PassengerNodes
         {
             get { return _passengerNodes; }
-            set { _passengerNodes = new HashSet<Node>(value); }
+            set { _passengerNodes = new HashSet<PassengerNode>(value); }
         }
         public DateTime UpdatedAt { get; protected set; }
     
@@ -33,17 +33,17 @@ namespace Passenger.Core.Domain
         public Passenger(User user)
         {
             UserId = user.Id;
-            Name = user.Name;
+            Name = user.Username;
         }
 
-        public void AddNode(Node node, string address)
-        {
-            var node = Nodes.SingleOrDefault(x => x.Address == address);
-            if(node == null)
-            {
-                throw new Exception($"Node '{address}' already exists.");
-            }
-            _passengerNodes.Add(node);
-        }
+        // public void AddNode(Node node, string address)
+        // {
+        //     var node = Nodes.SingleOrDefault(x => x.Address == address);
+        //     if(node == null)
+        //     {
+        //         throw new Exception($"Node '{address}' already exists.");
+        //     }
+        //     _passengerNodes.Add(node);
+        // }
     }
 }

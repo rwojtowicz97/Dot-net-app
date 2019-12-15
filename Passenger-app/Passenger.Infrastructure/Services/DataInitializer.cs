@@ -25,7 +25,8 @@ namespace Passenger.Infrastructure.Services
         public async Task SeedAsync()
         {
             var users = await _userService.BrowseAsync();
-            if(users.Any())
+            var drivers = await _driverService.BrowseAsync();
+            if(users.Any() && drivers.Any())
             {
                 return;
             }

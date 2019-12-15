@@ -10,6 +10,7 @@ namespace Passenger.Core.Domain
         public ISet<Route> _routes = new HashSet<Route>();
         private ISet<DayliRoute> _dayliRoutes = new HashSet<DayliRoute>();
         public Guid UserId { get; protected set; }
+        public Guid Id { get; protected set; }
         public string Name { get; protected set; }
         public Vehicle Vehicle { get; protected set; }
         public IEnumerable<Route> Routes 
@@ -31,12 +32,17 @@ namespace Passenger.Core.Domain
 
         public Driver(User user)
         {
+            Id = user.Id;
             UserId = user.Id;
             Name = user.Username;
         }
 
         public void SetVehicle(Vehicle vehicle)
         {
+            if(vehicle == null)
+            {
+                throw new Exception($"Vehicle is null");
+            }
             Vehicle = vehicle;
             UpdatedAt =  DateTime.UtcNow;
         }

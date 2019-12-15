@@ -17,6 +17,7 @@ namespace Passenger.Api.Controllers
             _vehicleProvider = vehicleProvider;
         }        
 
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             var vehicles = await _vehicleProvider.BrowseAsync();
