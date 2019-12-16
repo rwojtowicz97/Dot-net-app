@@ -32,7 +32,7 @@ namespace Passenger.Core.Domain
 
         public Driver(User user)
         {
-            Id = user.Id;
+            Id = Guid.NewGuid();
             UserId = user.Id;
             Name = user.Username;
         }

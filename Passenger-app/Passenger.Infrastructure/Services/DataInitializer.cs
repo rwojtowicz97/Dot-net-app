@@ -31,7 +31,6 @@ namespace Passenger.Infrastructure.Services
                 return;
             }
             _logger.LogInformation("Initializing data...");
-            var tasks = new List<Task>();
             for(var i = 1; i<=10; i++)
             {   
                 var userId = Guid.NewGuid();
@@ -40,7 +39,7 @@ namespace Passenger.Infrastructure.Services
                             username, "secret1234", "user");
                 _logger.LogInformation($"Created a new user: '{username}'.");
                 await _driverService.CreateAsync(userId);
-                await _driverService.SetVehicleAsync(userId, "BMW", "i8");
+                await _driverService.SetVehicle(userId, "BMW", "i8");
                 _logger.LogInformation($"Adding a new driver for: '{username}'.");
                 await _driverRouteService.AddAsync(userId, "Default route", 1,1,2,2);
                 await _driverRouteService.AddAsync(userId, "Job route", 3,4,7,8);
@@ -52,10 +51,9 @@ namespace Passenger.Infrastructure.Services
                 var userId = Guid.NewGuid();
                 var username = $"admin{i}";
                 _logger.LogInformation($"Created a new admin: '{username}'.");
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@test.com",
-                             username, "secret1234", "admin"));
+                await _userService.RegisterAsync(userId, $"{username}@test.com",
+                             username, "secret1234", "admin");
             }
-            await Task.WhenAll(tasks);
             _logger.LogInformation("Data was Initialized.");
         }
     }

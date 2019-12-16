@@ -48,26 +48,41 @@ namespace Passenger.Infrastructure.Services
 
             if(driver != null)
             {
-                 throw new ServiceException(Exceptions.ErrorCodes.DriverAlreadyExists ,$"Driver with id: {userId} already exists.");
+                 throw new ServiceException(Exceptions.ErrorCodes.DriverAlreadyExists, $"Driver with id: {userId} already exists.");
             }
 
             driver = new Driver(user);
             await  _driverRepository.AddAsync(driver);
         }
 
-        public async Task SetVehicleAsync(Guid userId, string brand, string name)
+        public async Task DeleteAsync(Guid userId)
+        {
+            var driver = await _driverRepository.GetOrFailAsync(userId);
+            await _driverRepository.DeleteAsync(driver);
+        }
+
+        public async Task SetVehicle(string username, string brand, string name)
+        {
+            var driver = await _driverRepository.GetOrFailAsync(username);
+            var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
+            var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
+            
+            driver.SetVehicle(vehicle);
+            if(driver.Vehicle == null)
+            {
+                throw new Exception($"Vehicle is null");
+            }
+        }
+
+        public async Task SetVehicle(Guid userId, string brand, string name)
         {
             var driver = await _driverRepository.GetOrFailAsync(userId);
             var vehicleDetails = await _vehicleProvider.GetAsync(brand, name);
             var vehicle = Vehicle.Create(name, brand, vehicleDetails.Seats);
             
             driver.SetVehicle(vehicle);
-        }
 
-        public async Task DeleteAsync(Guid userId)
-        {
-            var driver = await _driverRepository.GetOrFailAsync(userId);
-            await _driverRepository.DeleteAsync(driver);
+            await _driverRepository.UpdateAsync(driver);
         }
     }
 }

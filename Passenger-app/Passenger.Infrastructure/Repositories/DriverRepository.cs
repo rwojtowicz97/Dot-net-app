@@ -18,6 +18,9 @@ namespace Passenger.Infrastructure.Repositories
 
         public async Task<Driver> GetAsync(Guid userId)
             => await Drivers.AsQueryable().FirstOrDefaultAsync(x => x.UserId == userId);
+
+        public async Task<Driver> GetAsync(string username)
+            => await Drivers.AsQueryable().FirstOrDefaultAsync(x => x.Name == username);
         public async Task<IEnumerable<Driver>> BrowseAsync()
             => await Drivers.AsQueryable().ToListAsync();
 

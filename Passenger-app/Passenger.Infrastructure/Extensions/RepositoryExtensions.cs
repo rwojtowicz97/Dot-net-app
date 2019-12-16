@@ -18,6 +18,17 @@ namespace Passenger.Infrastructure.Extensions
             return driver;
         }
 
+        public static async Task<Driver> GetOrFailAsync(this IDriverRepository repository, string username)
+        {
+            var driver = await repository.GetAsync(username);
+            if(driver == null)
+            {
+                throw new Exception($"Drivers with name '{username}' doesn't exists.");
+            }
+
+            return driver;
+        }
+
         public static async Task<User> GetOrFailAsync(this IUserRepository repository, Guid userId)
         {
             var user = await repository.GetAsync(userId);
