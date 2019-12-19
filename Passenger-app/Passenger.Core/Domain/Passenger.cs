@@ -12,7 +12,7 @@ namespace Passenger.Core.Domain
         public Guid Id { get; protected set; }
         public Guid UserId { get; protected set; }
         public string Name { get; protected set; }
-        public Node Address { get; protected set; }
+        public PassengerNode Address { get; protected set; }
         public IEnumerable<Node> Nodes
         {
             get { return _nodes; }
@@ -36,14 +36,9 @@ namespace Passenger.Core.Domain
             Name = user.Username;
         }
 
-        // public void AddNode(Node node, string address)
-        // {
-        //     var node = Nodes.SingleOrDefault(x => x.Address == address);
-        //     if(node == null)
-        //     {
-        //         throw new Exception($"Node '{address}' already exists.");
-        //     }
-        //     _passengerNodes.Add(node);
-        // }
+        public void AddNode(PassengerNode passengerNode)
+        {
+            
+        }
     }
 }

@@ -4,6 +4,8 @@ using Passenger.Infrastructure.DTO;
 
 namespace Passenger.Infrastructure.Mappers
 {
+
+    using Passenger.Core.Domain;
     public static class AutoMapperConfig
     {
         public static IMapper Initialize()
@@ -15,6 +17,7 @@ namespace Passenger.Infrastructure.Mappers
                 cfg.CreateMap<Route, RouteDto>();
                 cfg.CreateMap<User, UserDto>();
                 cfg.CreateMap<Vehicle, VehicleDto>();
+                cfg.CreateMap<Passenger, PassengerDto>();
             }).CreateMapper();
         
     }

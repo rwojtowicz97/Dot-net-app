@@ -10,7 +10,10 @@ namespace Passenger.Core.Domain
         private ISet<PassengerNode> _passengerNodes = new HashSet<PassengerNode>();
         public Route Route { get; protected set; }
         public Guid Id { get; protected set; }
-        public IEnumerable<PassengerNode> PassengerNodes { get; protected set; }
+        public IEnumerable<PassengerNode> PassengerNodes 
+        { get { return _passengerNodes; }
+          set { _passengerNodes = new HashSet<PassengerNode>(value); } 
+        }
     
         public void AddPassengerNode(Passenger passenger, Node node)
         {
