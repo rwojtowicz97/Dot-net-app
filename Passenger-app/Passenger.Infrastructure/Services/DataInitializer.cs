@@ -8,15 +8,17 @@ namespace Passenger.Infrastructure.Services
 {
     public class DataInitializer : IDataInitializer
     {
+        private readonly IWebRequestService _webRequestService;
         private readonly IUserService _userService;
         private readonly IDriverService _driverService;
         private readonly IPassengerService _passengerService;
         private readonly IDriverRouteService _driverRouteService;
         private readonly ILogger<DataInitializer> _logger;
-        public DataInitializer(IUserService userService, IDriverService driverService,
+        public DataInitializer(IWebRequestService webRequestService, IUserService userService, IDriverService driverService,
         IPassengerService passengerService, IDriverRouteService driverRouteService,
          ILogger<DataInitializer> logger)
         {
+            _webRequestService = webRequestService;
             _userService = userService;
             _driverService = driverService;
             _passengerService = passengerService;
@@ -26,10 +28,12 @@ namespace Passenger.Infrastructure.Services
 
         public async Task SeedAsync()
         {
+
             var users = await _userService.BrowseAsync();
             var drivers = await _driverService.BrowseAsync();
             if(users.Any() && drivers.Any())
             {
+                _webRequestService.CreateUrl();
                 return;
             }
             _logger.LogInformation("Initializing data...");
