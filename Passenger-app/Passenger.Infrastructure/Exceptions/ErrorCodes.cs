@@ -7,6 +7,7 @@ namespace Passenger.Infrastructure.Exceptions
         public static string InvalidCredentials => "invalid_credentials";
         public static string DriverNotFound => "driver_not_found";
         public static string DriverAlreadyExists => "driver_already_exists";
+        public static string PassengerAlreadyExists => "passenger_already_exists";
         public static string UserNotFound => "user_not_found";
     }
 }

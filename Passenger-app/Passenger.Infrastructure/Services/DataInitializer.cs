@@ -10,14 +10,16 @@ namespace Passenger.Infrastructure.Services
     {
         private readonly IUserService _userService;
         private readonly IDriverService _driverService;
+        private readonly IPassengerService _passengerService;
         private readonly IDriverRouteService _driverRouteService;
         private readonly ILogger<DataInitializer> _logger;
         public DataInitializer(IUserService userService, IDriverService driverService,
-        IDriverRouteService driverRouteService,
+        IPassengerService passengerService, IDriverRouteService driverRouteService,
          ILogger<DataInitializer> logger)
         {
             _userService = userService;
             _driverService = driverService;
+            _passengerService = passengerService;
             _driverRouteService = driverRouteService;
             _logger = logger;
         }
@@ -44,6 +46,17 @@ namespace Passenger.Infrastructure.Services
                 await _driverRouteService.AddAsync(userId, "Default route", 1,1,2,2);
                 await _driverRouteService.AddAsync(userId, "Job route", 3,4,7,8);
                 _logger.LogInformation($"Adding route for: '{username}'.");
+            }
+
+            for(var i = 1; i<=3; i++)
+            {   
+                var userId = Guid.NewGuid();
+                var username = $"userPassenger{i}";
+                await _userService.RegisterAsync(userId, $"{username}@test.com",
+                            username, "secret1234", "user");
+                _logger.LogInformation($"Created a new user: '{username}'.");
+                await _passengerService.CreateAsync(userId);
+                _logger.LogInformation($"Adding a new passenger for: '{username}'.");
             }
             
             for(var i = 1; i<=3; i++)

@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 
 namespace Passenger.Infrastructure.Extensions
 {
+    using Passenger.Core.Domain;
+
     public static class RepositoryExtensions
     {
         public static async Task<Driver> GetOrFailAsync(this IDriverRepository repository, Guid userId)
@@ -38,6 +39,17 @@ namespace Passenger.Infrastructure.Extensions
             }
 
             return user;
+        }
+
+        public static async Task<Passenger> GetOrFailAsync(this IPassengerRepository repository, Guid userId)
+        {
+            var passenger = await repository.GetAsync(userId);
+            if(passenger == null)
+            {
+                throw new Exception($"Passenger with id '{userId}' doesn't exists.");
+            }
+
+            return passenger;
         }
     }
 }

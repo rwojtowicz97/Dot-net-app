@@ -9,7 +9,6 @@ namespace Passenger.Infrastructure.Services
     {
         Task<PassengerDetailsDto> GetAsync(Guid userId);
         Task CreateAsync(Guid userId);
-        Task AddPassengerNode();
         Task<IEnumerable<PassengerDto>> BrowseAsync();
         Task DeleteAsync(Guid userId);
     }

@@ -27,6 +27,7 @@ namespace Passenger.Infrastructure.Repositories
             => await Passengers.DeleteOneAsync(x => x.UserId == passenger.UserId);
         public async Task UpdateAsync(Passenger passenger)
             => await Passengers.ReplaceOneAsync(x => x.UserId == passenger.UserId, passenger);
+
         private IMongoCollection<Passenger> Passengers => _database.GetCollection<Passenger>("Passengers");
     }
 }

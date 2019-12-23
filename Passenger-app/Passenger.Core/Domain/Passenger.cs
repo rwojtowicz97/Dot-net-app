@@ -32,13 +32,31 @@ namespace Passenger.Core.Domain
 
         public Passenger(User user)
         {
+            Id = Guid.NewGuid();
             UserId = user.Id;
             Name = user.Username;
         }
 
-        public void AddNode(PassengerNode passengerNode)
+        public void AddPassengerNode(string address)
         {
-            
+            var node = PassengerNodes.SingleOrDefault(x => x.Node.Address == address);
+            if(node != null)
+            {
+                throw new Exception($"Node with address: '{address}' already exists.");
+            }
+            _passengerNodes.Add(node);
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void DeletePassengerNode(string address)
+        {
+            var node = PassengerNodes.SingleOrDefault(x => x.Node.Address == address);
+            if(node == null)
+            {
+                throw new Exception($"Node with address: '{address}' doesn't exists.");
+            }
+            _passengerNodes.Remove(node);
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }
