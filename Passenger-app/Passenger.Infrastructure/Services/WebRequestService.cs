@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Services
@@ -8,13 +9,35 @@ namespace Passenger.Infrastructure.Services
     {
         
         public static string baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-        public static string address = "Kołodzieja,+80180+gdansk";
         public static string apiKey = "&key=AIzaSyA_y-qtID0FOB17qY6wyacbQUG7aYYL9GQ";
-        static string url = String.Concat(baseUrl, address, apiKey);
-        WebRequest request = WebRequest.Create(url);
-
-        public void CreateUrl()
-            => Console.WriteLine(url);
+        public void CreateUrl(string street, string city, string zipCode)
+        {
+            string url = String.Concat(baseUrl, CleanStreet(street), ",+", zipCode, "+", CleanCity(city), apiKey);
+            Console.WriteLine(url);
+        }
         
+        public string CleanStreet(string street)
+        {
+            if(string.IsNullOrEmpty(street))
+            {
+                throw new Exception("Street can't be null or empty.");
+            }
+            street = street.Trim();
+            string cleanStreet = Regex.Replace(street, @" +", "+");
+            street = cleanStreet;
+            return street;
+        }
+
+        public string CleanCity(string city)
+        {
+            if(string.IsNullOrEmpty(city))
+            {
+                throw new Exception("City can't be null or empty.");
+            }
+            city = city.Trim();
+            string cleanCity = Regex.Replace(city, @" +", "+");
+            city = cleanCity;
+            return city;
+        }
     }
 }

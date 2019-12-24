@@ -33,7 +33,8 @@ namespace Passenger.Infrastructure.Services
             var drivers = await _driverService.BrowseAsync();
             if(users.Any() && drivers.Any())
             {
-                _webRequestService.CreateUrl();
+                _webRequestService.CreateUrl(" Baczynskiego  12c", "Gdansk", "80-410");
+                //_webRequestService.CleanStree("  Test  owo ","spa cj  a  ");
                 return;
             }
             _logger.LogInformation("Initializing data...");
