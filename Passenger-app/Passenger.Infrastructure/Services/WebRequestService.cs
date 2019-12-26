@@ -16,6 +16,7 @@ namespace Passenger.Infrastructure.Services
             Console.WriteLine(url);
         }
         
+        //deleting whitespaces form string
         public string CleanStreet(string street)
         {
             if(string.IsNullOrEmpty(street))
@@ -27,7 +28,8 @@ namespace Passenger.Infrastructure.Services
             street = cleanStreet;
             return street;
         }
-
+        
+        //deleting whitespaces form string
         public string CleanCity(string city)
         {
             if(string.IsNullOrEmpty(city))
