@@ -4,8 +4,7 @@ namespace Passenger.Infrastructure.Services
 {
     public interface IWebRequestService : IService
     {
-        string CleanStreet(string street);
-        string CleanCity(string city);
+        string CleanString(string example);
         void CreateUrl(string street, string city, string zipCode);
     }
 }
