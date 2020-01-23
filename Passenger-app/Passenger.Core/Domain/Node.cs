@@ -5,23 +5,26 @@ namespace Passenger.Core.Domain
 {
     public class Node
     {
-        // New structure:
-
         public class AddressComponent
         {
 
         }
 
-        // Old structure:
         public string Address { get; protected set; }
         public double Longitude { get; protected set; }
         public double Latitude { get; protected set; }
-    
+        public List<Result> results { get; set; }
+        public string status { get; set; }
+
         protected Node()
         {
 
         }
 
+        public Node(string url)
+        {
+            
+        }
         public Node(string address, double longitude, double latitude)
         {
             SetAddress(address);
@@ -32,6 +35,11 @@ namespace Passenger.Core.Domain
         public static Node Create(string address, double longitude, double latitude)
             => new Node(address, longitude, latitude);
         
+        // public static Node Create(string url)
+        // {
+        //     //new Node = JsonConvert
+        // }
+
         public void SetAddress(string address)
         {
             if(!string.IsNullOrWhiteSpace(address))
@@ -133,11 +141,5 @@ namespace Passenger.Core.Domain
         public string place_id { get; set; }
         public List<string> postcode_localities { get; set; }
         public List<string> types { get; set; }
-    }
-
-    public class RootObject
-    {
-        public List<Result> results { get; set; }
-        public string status { get; set; }
     }
 }
